@@ -6,7 +6,6 @@ import {EyeIcon} from "../../assets/svg";
 import "./PasswordInput.scss";
 
 const PasswordInput = ({
-    isValid,
     placeholder = "Password",
     id,
     name,
@@ -24,7 +23,7 @@ const PasswordInput = ({
                     {label}
                 </label>
             )}
-            <div className={`custom-input${isValid ? "" : "-error"}`}>
+            <div className="custom-input">
                 <Field
                     type={type}
                     name={name}
@@ -45,7 +44,6 @@ const PasswordInput = ({
 };
 
 PasswordInput.propTypes = {
-    isValid: PropTypes.bool,
     placeholder: PropTypes.string,
     id: PropTypes.string,
     name: PropTypes.string.isRequired,

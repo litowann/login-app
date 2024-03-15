@@ -4,11 +4,10 @@ import PropTypes from "prop-types";
 import "./EmailInput.scss";
 
 const EmailInput = ({
-    isValid,
     placeholder = "Email",
     onBlur
 }) => (
-    <div className={`email-input${isValid ? "" : "-error"}`}>
+    <div className="email-input">
         <Field
             type="email"
             id="email"
@@ -21,7 +20,6 @@ const EmailInput = ({
 );
 
 EmailInput.propTypes = {
-    isValid: PropTypes.bool,
     placeholder: PropTypes.string,
     onBlur: PropTypes.func,
 }
