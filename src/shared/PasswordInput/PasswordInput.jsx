@@ -10,9 +10,7 @@ const PasswordInput = ({
     placeholder = "Password",
     id,
     name,
-    label,
-    onChange,
-    value
+    label
 }) => {
     const [type, setType] = useState("password");
 
@@ -29,11 +27,9 @@ const PasswordInput = ({
             <div className={`custom-input${isValid ? "" : "-error"}`}>
                 <Field
                     type={type}
-                    name="password"
+                    name={name}
                     id={id}
                     placeholder={placeholder}
-                    value={value}
-                    onChange={onChange}
                 />
                 <span className="eye-icon" onClick={handleEyeClick}>
                     <EyeIcon/>
@@ -53,9 +49,7 @@ PasswordInput.propTypes = {
     placeholder: PropTypes.string,
     id: PropTypes.string,
     name: PropTypes.string.isRequired,
-    label: PropTypes.string,
-    onChange: PropTypes.func,
-    value: PropTypes.string.isRequired
+    label: PropTypes.string
 }
 
 export default PasswordInput;

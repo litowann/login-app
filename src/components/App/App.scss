@@ -1,7 +1,7 @@
 @import "../../assets/styles/variables";
 
 body {
-  font-family: "Darker Grotesque", sans-serif;
+  font-family: "BasisGrotesquePro-Medium", sans-serif;
   font-optical-sizing: auto;
 }
 
@@ -55,9 +55,9 @@ body {
         text-align: left;
         color: $dangerous;
         font-weight: 500;
-        font-size: 16px;
+        font-size: 14px;
 
-        padding: 2px 0 2px 0;
+        padding: 4px 0 0 4px;
       }
     }
   }

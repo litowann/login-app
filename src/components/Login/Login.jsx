@@ -10,25 +10,23 @@ import {
     ThirdPartyButton
 } from "../../shared";
 import {GoogleIcon, GithubIcon} from "../../assets/svg";
+import {ROUTES} from "../../helpers/constants";
 
 import "./Login.scss";
 
 const Login = () => {
-    const [emailValue, setEmailValue] = useState("");
-    const [passwordValue, setPasswordValue] = useState("");
+    const [isEmailFieldBlurred, setIsEmailFieldBlurred] = useState(false);
 
     const initialValues = {
         email: "",
-        password: "",
+        password: ""
     };
 
     const handleSubmit = (values, {setSubmitting}) => {
         setSubmitting(false);
     };
 
-    const handleEmailChange = ({target: {value}}) => setEmailValue(value);
-
-    const handlePasswordChange = ({target: {value}}) => setPasswordValue(value);
+    const handleEmailBlur = () => setIsEmailFieldBlurred(true);
 
     return (
         <div className="login-page">
@@ -49,28 +47,27 @@ const Login = () => {
                 validationSchema={loginPageValidationSchema}
                 onSubmit={handleSubmit}
             >
-                {({isSubmitting, isValid, errors, values}) => (
+                {({isSubmitting, errors, isValid, values, handleBlur}) => (
                     <Form>
                         <div className="input-container">
                             <EmailInput
-                                isValid={isValid}
-                                value={emailValue}
-                                onChange={handleEmailChange}
+                                isValid={!errors.email}
+                                onBlur={(e) => {
+                                    handleBlur(e);
+                                    handleEmailBlur();
+                                }}
+                                errors={errors}
                             />
-
-
-                            {!errors.email && values.email && (
+                            {values.email && isEmailFieldBlurred && (
                                 <PasswordInput
                                     isValid={isValid}
-                                    value={passwordValue}
-                                    onChange={handlePasswordChange}
                                     name="password"
                                 />
                             )}
                         </div>
                         <Link
                             className="forgot-password"
-                            to="/forgot-password"
+                            to={ROUTES.FORGOT_PASSWORD}
                         >
                             Forgot Password
                         </Link>

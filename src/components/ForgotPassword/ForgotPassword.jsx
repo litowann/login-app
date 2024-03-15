@@ -1,4 +1,3 @@
-import {useState} from "react";
 import {Form, Formik} from "formik";
 import {useNavigate} from "react-router-dom";
 import {forgotPasswordPageValidationSchema} from "../../validation/schema";
@@ -7,7 +6,6 @@ import {ROUTES} from "../../helpers/constants";
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
-    const [emailValue, setEmailValue] = useState("");
 
     const initialValues = {
         email: "",
@@ -23,8 +21,6 @@ const ForgotPassword = () => {
         navigate(ROUTES.RESET_PASSWORD);
     };
 
-    const handleChange = ({target: {value}}) => setEmailValue(value)
-
     return (
         <div className="forgot-password-page">
             <h2 className="title">Forgot Password?</h2>
@@ -37,8 +33,6 @@ const ForgotPassword = () => {
                     <Form>
                         <EmailInput
                             isValid={isValid}
-                            value={emailValue}
-                            onChange={handleChange}
                         />
                         <ActionButton
                             text="Send"

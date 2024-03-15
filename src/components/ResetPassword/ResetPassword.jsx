@@ -1,4 +1,3 @@
-import {useState} from "react";
 import {Form, Formik} from "formik";
 import {useNavigate} from "react-router-dom";
 import {resetPasswordPageValidationSchema} from "../../validation/schema";
@@ -7,8 +6,6 @@ import {ROUTES} from "../../helpers/constants";
 
 const ResetPassword = () => {
     const navigate = useNavigate();
-    const [passwordValue, setPasswordValue] = useState("");
-    const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
 
     const initialValues = {
         password: "",
@@ -23,11 +20,6 @@ const ResetPassword = () => {
         navigate(ROUTES.LOGIN);
     };
 
-    const handlePasswordChange = ({target: {value}}) => setPasswordValue(value);
-
-    const handleConfirmPasswordChange = ({target: {value}}) =>
-        setConfirmPasswordValue(value);
-
     return (
         <div className="reset-password-page">
             <h2 className="title">Create new Password?</h2>
@@ -36,7 +28,7 @@ const ResetPassword = () => {
                 validationSchema={resetPasswordPageValidationSchema}
                 onSubmit={handleSubmit}
             >
-                {({isSubmitting, isValid}) => (
+                {({isSubmitting, errors, isValid}) => (
                     <Form>
                         <div className="input-container">
                             <PasswordInput
@@ -44,16 +36,12 @@ const ResetPassword = () => {
                                 id="password"
                                 label="Password"
                                 isValid={isValid}
-                                value={passwordValue}
-                                onChange={handlePasswordChange}
                             />
                             <PasswordInput
                                 name="confirmPassword"
                                 id="confirmPassword"
                                 label="Confirm Password"
                                 isValid={isValid}
-                                value={confirmPasswordValue}
-                                onChange={handleConfirmPasswordChange}
                             />
                         </div>
                         <ActionButton

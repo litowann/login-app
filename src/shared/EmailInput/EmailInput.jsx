@@ -5,9 +5,8 @@ import "./EmailInput.scss";
 
 const EmailInput = ({
     isValid,
-    value,
-    onChange,
-    placeholder = "Email"
+    placeholder = "Email",
+    onBlur
 }) => (
     <div className={`email-input${isValid ? "" : "-error"}`}>
         <Field
@@ -15,8 +14,7 @@ const EmailInput = ({
             id="email"
             name="email"
             placeholder={placeholder}
-            value={value}
-            onChange={onChange}
+            onBlur={onBlur}
         />
         <ErrorMessage name="email" component="div" className="error"/>
     </div>
@@ -24,9 +22,8 @@ const EmailInput = ({
 
 EmailInput.propTypes = {
     isValid: PropTypes.bool,
-    value: PropTypes.string.isRequired,
-    onChange: PropTypes.func,
     placeholder: PropTypes.string,
+    onBlur: PropTypes.func,
 }
 
 export default EmailInput;

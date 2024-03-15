@@ -22,8 +22,7 @@ export const resetPasswordPageValidationSchema = Yup.object().shape({
     password: Yup
         .string()
         .required('Password is required')
-        .min(8, 'The password fields should be at least 8 characters long')
-        .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+        .min(8, 'The password fields should be at least 8 characters long'),
     confirmPassword: Yup
         .string()
         .oneOf([Yup.ref('password')], 'Passwords must match'),

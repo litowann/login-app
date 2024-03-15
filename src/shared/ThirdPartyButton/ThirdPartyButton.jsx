@@ -11,7 +11,7 @@ const ThirdPartyButton = ({icon, text}) => (
 );
 
 ThirdPartyButton.propTypes = {
-    icon: PropTypes.elementType,
+    icon: PropTypes.node,
     text: PropTypes.string.isRequired
 }
 
