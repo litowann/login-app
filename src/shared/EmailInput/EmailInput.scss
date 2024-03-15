@@ -1,0 +1,23 @@
+@import "../../assets/styles/variables";
+
+.email-input,
+.email-input-error {
+  width: 100%;
+  height: auto;
+
+  input {
+    width: 93%;
+    height: 48px;
+
+    border: 1px solid $btn-border;
+    border-radius: 6px;
+    padding: 0 12px;
+  }
+
+  &-error {
+    input {
+      border: 1px solid $dangerous;
+    }
+  }
+
+}

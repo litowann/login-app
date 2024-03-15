@@ -1,0 +1,35 @@
+@import "../../assets/styles/variables";
+
+.login-page {
+  .btn-container {
+    display: flex;
+    gap: 16px;
+  }
+
+  form {
+    text-align: right;
+  }
+
+  .sign-up,
+  .sign-up-link,
+  .forgot-password {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: $action-btn-bg;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .sign-up {
+    color: $text;
+    margin: 20px 0 0;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

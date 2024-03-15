@@ -1,0 +1,28 @@
+@import "../../assets/styles/variables";
+
+.third-party-btn {
+  width: 192px;
+  height: 48px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+
+  border: 1px solid $btn-border;
+  border-radius: 6px;
+
+  &:hover {
+    opacity: .7;
+  }
+
+  .text {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: $btn-text-color;
+    margin-bottom: 5px;
+  }
+}

@@ -1,0 +1,64 @@
+@import "../../assets/styles/variables";
+
+body {
+  font-family: "Darker Grotesque", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.wrapper {
+  width: 400px;
+  height: auto;
+
+  margin: 180px auto 0;
+  text-align: center;
+
+  @media screen and (max-width: $mobile-middle) {
+    width: auto;
+  }
+
+  .container {
+    width: 100%;
+    height: auto;
+
+    margin-top: 80px;
+
+    .title {
+      font-weight: 700;
+      font-size: 30px;
+      line-height: 39px;
+      color: $title;
+
+      margin: 0 0 40px;
+    }
+
+    form {
+      margin-top: 30px;
+
+      .input-container {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+
+        margin-bottom: 15px;
+      }
+
+      input {
+        &::placeholder {
+          font-weight: 400;
+          font-size: 15px;
+          line-height: 20px;
+          color: $input-text;
+        }
+      }
+
+      .error {
+        text-align: left;
+        color: $dangerous;
+        font-weight: 500;
+        font-size: 16px;
+
+        padding: 2px 0 2px 0;
+      }
+    }
+  }
+}
