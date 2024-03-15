@@ -1,11 +1,17 @@
+import {useState} from "react";
 import {Form, Formik} from "formik";
 import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 import {forgotPasswordPageValidationSchema} from "../../validation/schema";
 import {ActionButton, EmailInput} from "../../shared";
 import {ROUTES} from "../../helpers/constants";
+import {passwordResetRequest} from "../../actions/restorePasswordActions";
 
 const ForgotPassword = () => {
+    const [email, setEmail] = useState("");
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const error = useSelector((state) => state.error);
 
     const initialValues = {
         email: "",
@@ -15,10 +21,14 @@ const ForgotPassword = () => {
         setSubmitting(false);
     };
 
-    const handleNavigate = () => navigate(ROUTES.LOGIN);
+    const handleCancel = () => navigate(ROUTES.LOGIN);
 
     const handleSend = () => {
-        navigate(ROUTES.RESET_PASSWORD);
+        dispatch(passwordResetRequest(email));
+
+        if (!error) {
+            navigate(ROUTES.RESET_PASSWORD);
+        }
     };
 
     return (
@@ -29,10 +39,15 @@ const ForgotPassword = () => {
                 validationSchema={forgotPasswordPageValidationSchema}
                 onSubmit={handleSubmit}
             >
-                {({isSubmitting, isValid}) => (
+                {({isSubmitting, isValid, handleChange}) => (
                     <Form>
                         <EmailInput
                             isValid={isValid}
+                            value={email}
+                            onChange={(e) => {
+                                handleChange(e);
+                                setEmail(e.target.value);
+                            }}
                         />
                         <ActionButton
                             text="Send"
@@ -42,7 +57,7 @@ const ForgotPassword = () => {
                         <ActionButton
                             isCancelBtn
                             text="Cancel"
-                            onClick={handleNavigate}
+                            onClick={handleCancel}
                         />
                     </Form>
                 )}

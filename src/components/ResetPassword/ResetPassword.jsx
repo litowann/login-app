@@ -1,11 +1,17 @@
+import {useState} from "react";
 import {Form, Formik} from "formik";
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
 import {resetPasswordPageValidationSchema} from "../../validation/schema";
 import {ActionButton, PasswordInput} from "../../shared";
 import {ROUTES} from "../../helpers/constants";
+import {passwordSetRequest} from "../../actions/restorePasswordActions";
 
 const ResetPassword = () => {
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const initialValues = {
         password: "",
@@ -17,7 +23,8 @@ const ResetPassword = () => {
     };
 
     const handleReset = () => {
-        navigate(ROUTES.LOGIN);
+        dispatch(passwordSetRequest(null, null, password))
+        // navigate(ROUTES.LOGIN);
     };
 
     return (
@@ -28,7 +35,7 @@ const ResetPassword = () => {
                 validationSchema={resetPasswordPageValidationSchema}
                 onSubmit={handleSubmit}
             >
-                {({isSubmitting, errors, isValid}) => (
+                {({isSubmitting, isValid, handleChange}) => (
                     <Form>
                         <div className="input-container">
                             <PasswordInput
@@ -36,12 +43,22 @@ const ResetPassword = () => {
                                 id="password"
                                 label="Password"
                                 isValid={isValid}
+                                value={password}
+                                onChange={(e) => {
+                                    handleChange(e);
+                                    setPassword(e.target.value);
+                                }}
                             />
                             <PasswordInput
                                 name="confirmPassword"
                                 id="confirmPassword"
                                 label="Confirm Password"
                                 isValid={isValid}
+                                value={confirmPassword}
+                                onChange={(e) => {
+                                    handleChange(e);
+                                    setConfirmPassword(e.target.value);
+                                }}
                             />
                         </div>
                         <ActionButton

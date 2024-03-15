@@ -2,11 +2,12 @@ import * as TYPES from "./types";
 
 export const passwordResetRequest = (email) => ({
     type: TYPES.PASSWORD_RESET_REQUEST,
-    payload: { email }
+    payload: email
 });
 
-export const passwordResetSuccess = () => ({
-    type: TYPES.PASSWORD_RESET_SUCCESS
+export const passwordResetSuccess = (email) => ({
+    type: TYPES.PASSWORD_RESET_SUCCESS,
+    payload: { email }
 });
 
 export const passwordResetFailure = (error) => ({
@@ -14,14 +15,14 @@ export const passwordResetFailure = (error) => ({
     payload: error
 });
 
-// Action creators for setting new password
 export const passwordSetRequest = (token, secret, password) => ({
     type: TYPES.PASSWORD_SET_REQUEST,
     payload: { token, secret, password }
 });
 
-export const passwordSetSuccess = () => ({
-    type: TYPES.PASSWORD_SET_SUCCESS
+export const passwordSetSuccess = (token, secret, password) => ({
+    type: TYPES.PASSWORD_SET_SUCCESS,
+    payload: { token, secret, password }
 });
 
 export const passwordSetFailure = (error) => ({

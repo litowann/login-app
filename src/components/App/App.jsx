@@ -4,6 +4,7 @@ import {ForgotPassword} from "../ForgotPassword";
 import {ResetPassword} from "../ResetPassword";
 import {Logo} from "../../assets/svg";
 import {ROUTES} from "../../helpers/constants";
+import Notification from "../../shared/Notification/Notification";
 
 import "./App.scss";
 
@@ -27,6 +28,7 @@ const App = () => (
                 </Routes>
             </div>
         </Router>
+        <Notification />
     </div>
 );
 

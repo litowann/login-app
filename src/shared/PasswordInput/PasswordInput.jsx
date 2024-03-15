@@ -9,7 +9,9 @@ const PasswordInput = ({
     placeholder = "Password",
     id,
     name,
-    label
+    label,
+    onChange,
+    value
 }) => {
     const [type, setType] = useState("password");
 
@@ -29,6 +31,8 @@ const PasswordInput = ({
                     name={name}
                     id={id}
                     placeholder={placeholder}
+                    onChange={onChange}
+                    value={value}
                 />
                 <span className="eye-icon" onClick={handleEyeClick}>
                     <EyeIcon/>
@@ -47,7 +51,9 @@ PasswordInput.propTypes = {
     placeholder: PropTypes.string,
     id: PropTypes.string,
     name: PropTypes.string.isRequired,
-    label: PropTypes.string
+    label: PropTypes.string,
+    onChange: PropTypes.func,
+    value: PropTypes.string
 }
 
 export default PasswordInput;

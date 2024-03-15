@@ -5,7 +5,9 @@ import "./EmailInput.scss";
 
 const EmailInput = ({
     placeholder = "Email",
-    onBlur
+    onBlur,
+    onChange,
+    value
 }) => (
     <div className="email-input">
         <Field
@@ -14,6 +16,8 @@ const EmailInput = ({
             name="email"
             placeholder={placeholder}
             onBlur={onBlur}
+            onChange={onChange}
+            value={value}
         />
         <ErrorMessage name="email" component="div" className="error"/>
     </div>
@@ -22,6 +26,8 @@ const EmailInput = ({
 EmailInput.propTypes = {
     placeholder: PropTypes.string,
     onBlur: PropTypes.func,
+    onChange: PropTypes.func,
+    value: PropTypes.string
 }
 
 export default EmailInput;

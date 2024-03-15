@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {Formik, Form} from "formik";
 import {Link} from "react-router-dom";
+import {useDispatch} from "react-redux";
 import {loginPageValidationSchema} from "../../validation/schema";
 import {
     ActionButton,
@@ -11,11 +12,15 @@ import {
 } from "../../shared";
 import {GoogleIcon, GithubIcon} from "../../assets/svg";
 import {ROUTES} from "../../helpers/constants";
+import {loginRequest} from "../../actions/loginActions";
 
 import "./Login.scss";
 
 const Login = () => {
     const [isEmailFieldBlurred, setIsEmailFieldBlurred] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
 
     const initialValues = {
         email: "",
@@ -27,6 +32,10 @@ const Login = () => {
     };
 
     const handleEmailBlur = () => setIsEmailFieldBlurred(true);
+
+    const handleLogin = () => {
+        dispatch(loginRequest({email, password}));
+    };
 
     return (
         <div className="login-page">
@@ -47,7 +56,7 @@ const Login = () => {
                 validationSchema={loginPageValidationSchema}
                 onSubmit={handleSubmit}
             >
-                {({isSubmitting, errors, isValid, values, handleBlur}) => (
+                {({isSubmitting, errors, isValid, values, handleBlur, handleChange}) => (
                     <Form>
                         <div className="input-container">
                             <EmailInput
@@ -56,12 +65,22 @@ const Login = () => {
                                     handleBlur(e);
                                     handleEmailBlur();
                                 }}
+                                onChange={(e) => {
+                                    handleChange(e)
+                                    setEmail(e.target.value)
+                                }}
+                                value={email}
                                 errors={errors}
                             />
                             {values.email && isEmailFieldBlurred && (
                                 <PasswordInput
                                     isValid={isValid}
                                     name="password"
+                                    onChange={(e) => {
+                                        handleChange(e)
+                                        setPassword(e.target.value)
+                                    }}
+                                    value={password}
                                 />
                             )}
                         </div>
@@ -74,6 +93,7 @@ const Login = () => {
                         <ActionButton
                             text="Log in to Qencode"
                             disabled={isSubmitting}
+                            onClick={handleLogin}
                         />
                     </Form>
                 )}

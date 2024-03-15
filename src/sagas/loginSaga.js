@@ -3,16 +3,19 @@ import axios from "axios";
 import { notifySuccess, notifyError } from "../shared/Notification/Notification";
 import * as TYPES from "../actions/types";
 import {API_BASE_URL} from "../helpers/constants";
+import {loginFailure, loginSuccess} from "../actions/loginActions";
+import {verifyAccessTokenRequest, refreshTokenRequest} from "../actions/tokenActions";
 
 function* login(action) {
     try {
-        const { email, password } = action.payload;
-        const response = yield call(axios.post, `${API_BASE_URL}/login`, { email, password });
-        yield put({ type: TYPES.LOGIN_SUCCESS, payload: response.data });
-        notifySuccess('Login successful');
+        const response = yield call(axios.post, `${API_BASE_URL}/login`, action.payload);
+        yield put(loginSuccess());
+        yield put(verifyAccessTokenRequest(response.data.access_token));
+        yield put(refreshTokenRequest(response.data.refresh_token));
+        yield put(notifySuccess('Login successful'));
     } catch (error) {
-        yield put({ type: TYPES.LOGIN_FAILURE, error: error.response.data });
-        notifyError('Login failed');
+        yield put(loginFailure(error.message));
+        yield put(notifyError('Login failed'));
     }
 }
 
