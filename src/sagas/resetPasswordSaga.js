@@ -12,23 +12,31 @@ import {
 
 function* resetPasswordSaga(action) {
     try {
-        const response = yield call(axios.post, `${API_BASE_URL}/password-reset`, action.payload);
+        const response = yield call(axios.post, `${API_BASE_URL}/password-reset`, {email: action.payload});
+
         yield put(passwordResetSuccess(response.data));
-        yield put(notifySuccess('Password reset email sent. Please check your email to complete the process.'));
+        notifySuccess("Password reset email sent. Please check your email to complete the process.");
     } catch (error) {
+        const errorMessage = typeof error.response.data.detail === "string" ?
+            error.response.data.detail : "Password reset failed";
+
         yield put(passwordResetFailure(error.message));
-        yield put(notifyError('Password reset failed'));
+        notifyError(errorMessage);
     }
 }
 
 function* setPasswordSaga(action) {
     try {
         const response = yield call(axios.post, `${API_BASE_URL}/password-set`, action.payload);
+
         yield put(passwordSetSuccess(response.data));
-        yield put(notifySuccess('Password reset successfully'));
+        notifySuccess("Password reset successfully");
     } catch (error) {
+        const errorMessage = typeof error.response.data.detail === "string" ?
+            error.response.data.detail : "Password reset failed";
+
         yield put(passwordSetFailure(error.message));
-        yield put(notifyError('Password reset failed'));
+        notifyError(errorMessage);
     }
 }
 

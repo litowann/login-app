@@ -9,13 +9,17 @@ import {verifyAccessTokenRequest, refreshTokenRequest} from "../actions/tokenAct
 function* login(action) {
     try {
         const response = yield call(axios.post, `${API_BASE_URL}/login`, action.payload);
+
         yield put(loginSuccess());
         yield put(verifyAccessTokenRequest(response.data.access_token));
         yield put(refreshTokenRequest(response.data.refresh_token));
-        yield put(notifySuccess('Login successful'));
+        notifySuccess("Login successful");
     } catch (error) {
+        const errorMessage = typeof error.response.data.detail === "string" ?
+            error.response.data.detail : "Login failed";
+
         yield put(loginFailure(error.message));
-        yield put(notifyError('Login failed'));
+        notifyError(errorMessage);
     }
 }
 
