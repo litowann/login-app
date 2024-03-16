@@ -28,14 +28,11 @@ const Login = () => {
     };
 
     const handleSubmit = (values, {setSubmitting}) => {
+        dispatch(loginRequest(email, password));
         setSubmitting(false);
     };
 
     const handleEmailBlur = () => setIsEmailFieldBlurred(true);
-
-    const handleLogin = () => {
-        dispatch(loginRequest({email, password}));
-    };
 
     return (
         <div className="login-page">
@@ -93,7 +90,6 @@ const Login = () => {
                         <ActionButton
                             text="Log in to Qencode"
                             disabled={isSubmitting}
-                            onClick={handleLogin}
                         />
                     </Form>
                 )}

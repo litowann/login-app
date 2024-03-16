@@ -1,16 +1,13 @@
 import {useState} from "react";
 import {Form, Formik} from "formik";
-import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {resetPasswordPageValidationSchema} from "../../validation/schema";
 import {ActionButton, PasswordInput} from "../../shared";
-import {ROUTES} from "../../helpers/constants";
 import {passwordSetRequest} from "../../actions/restorePasswordActions";
 
 const ResetPassword = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const initialValues = {
@@ -20,11 +17,7 @@ const ResetPassword = () => {
 
     const handleSubmit = (values, {setSubmitting}) => {
         setSubmitting(false);
-    };
-
-    const handleReset = () => {
         dispatch(passwordSetRequest(null, null, password))
-        // navigate(ROUTES.LOGIN);
     };
 
     return (
@@ -64,7 +57,6 @@ const ResetPassword = () => {
                         <ActionButton
                             text="Reset Password"
                             disabled={isSubmitting}
-                            onClick={handleReset}
                         />
                     </Form>
                 )}

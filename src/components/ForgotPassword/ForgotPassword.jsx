@@ -19,17 +19,15 @@ const ForgotPassword = () => {
 
     const handleSubmit = (values, {setSubmitting}) => {
         setSubmitting(false);
-    };
 
-    const handleCancel = () => navigate(ROUTES.LOGIN);
-
-    const handleSend = () => {
         dispatch(passwordResetRequest(email));
 
         if (!error) {
             navigate(ROUTES.RESET_PASSWORD);
         }
     };
+
+    const handleCancel = () => navigate(ROUTES.LOGIN);
 
     return (
         <div className="forgot-password-page">
@@ -52,7 +50,6 @@ const ForgotPassword = () => {
                         <ActionButton
                             text="Send"
                             disabled={isSubmitting}
-                            onClick={handleSend}
                         />
                         <ActionButton
                             isCancelBtn
