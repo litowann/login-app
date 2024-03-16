@@ -1,7 +1,6 @@
 # The link to the deployed project:
 
 https://login-app-beryl.vercel.app/
-[https://login-app-beryl.vercel.app/](https://login-app-beryl.vercel.app/)
 
 # Getting Started with Create React App
 
